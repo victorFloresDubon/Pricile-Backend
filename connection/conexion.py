@@ -1,6 +1,7 @@
 from sqlite3 import DatabaseError
-import cx_oracle
+import cx_Oracle
 
+# Clase para manejar la conexión a la base de datos
 class ConexionOracle():
 
     def getConexion(self):
@@ -8,12 +9,11 @@ class ConexionOracle():
         password = 'CHATBOT'
         host = '25.79.181.200'
         port = 1521
-        dbName = ''
+        dbName = 'xe'
         try:
-            url = f'{user}/{password}@{host}:{port}/{dbName}'
-            con = cx_oracle.connect(url)
+            con = cx_Oracle.connect(f'{user}/{password}@{host}:{port}/{dbName}')
             print(con.version)
-        except cx_oracle.DatabaseError as e:
+        except cx_Oracle.DatabaseError as e:
             print("Ocurrió un problema al conectar", e)
         
         return con
