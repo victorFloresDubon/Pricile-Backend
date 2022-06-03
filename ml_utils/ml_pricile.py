@@ -5,7 +5,7 @@ from sklearn.linear_model import LinearRegression
 
 class PrediccionPricile():
 
-    def predecir_precio_venta_producto(self, productos):
+    def predecir_precio_venta_productos(self, productos):
         # Leemos el fichero para nuestro dataset
         precios = pd.DataFrame(productos)
 
