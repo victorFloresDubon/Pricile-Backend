@@ -1,6 +1,6 @@
 from distutils.log import debug
 from dao.productos_dao import ProductosDAO
-from flask import Flask
+from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
@@ -9,10 +9,11 @@ def index():
     return "Hello, Wordl"
 
 # Obtiene todos los registros de la tabla PRODUCTOS
-@app.route('/productos', methods=['GET'])
+@app.route("/productos", methods=['GET'])
 def getAllProductos():
-
-    return ProductosDAO.listar_productos()
+    dao = ProductosDAO()
+    if request.method == 'GET':
+        return jsonify(dao.listar_productos())
 
 
 if __name__ == "__main__":

@@ -9,3 +9,12 @@ class Productos():
         self.descripcion = descripcion
         self.precio_venta = precio_venta
         self.costo = costo
+
+    def serializable(self):
+        return {
+            "sku": self.sku,
+            "codigo": self.codigo,
+            "descripcion": self.descripcion,
+            "precio_venta": self.precio_venta,
+            "costo": self.costo
+        }

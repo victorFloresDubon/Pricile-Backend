@@ -1,12 +1,12 @@
 from connection.conexion import ConexionOracle
 from model.productos import Productos
+import json
 
 class ProductosDAO():
 
     # Lista todos los registros de la tabla
-    def listar_productos():
+    def listar_productos(self):
         list_productos = []
-
         sql = "SELECT * FROM productos"
         try:
             con = ConexionOracle().getConexion()
@@ -14,13 +14,13 @@ class ProductosDAO():
 
             # Ejecuta la consulta
             cur.execute(sql)
-            rows = cur.fetchAll()
+            rows = cur.fetchall()
 
             # Mapear los datos al modelo
-            for i in rows:
-                record = Productos(sku=rows[0], codigo=rows[1], descripcion=rows[3], precio_venta=rows[4], costo=rows[5])
-                list_productos.append(record)
-
+            for i, row in enumerate(rows):
+                record = Productos(sku=row[0], codigo=row[1], descripcion=row[2], precio_venta=row[3], costo=row[4])
+                # Serializa los registros y los agrega a la lista
+                list_productos.append(record.serializable())
         except Exception as e:
             print('Error:'+str(e))
         
@@ -30,7 +30,6 @@ class ProductosDAO():
             
             if con:
                 con.close()
-        
         return list_productos
 
 
