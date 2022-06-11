@@ -1,6 +1,5 @@
 from connection.conexion import ConexionOracle
 from model.productos import Productos
-import json
 
 class ProductosDAO():
 
